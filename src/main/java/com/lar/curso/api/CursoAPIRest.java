@@ -1,4 +1,4 @@
-package com.abctreinamentos.servidorpublicobdwebrest.api;
+package com.lar.curso.api;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.abctreinamentos.servidorpublicobdwebrest.entity.Curso;
+import com.lar.aluno.entity.Curso;
 
 /**************************************/
 public interface CursoAPIRest 

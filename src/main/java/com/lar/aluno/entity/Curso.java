@@ -1,4 +1,4 @@
-package com.abctreinamentos.servidorpublicobdwebrest.entity;
+package com.lar.aluno.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -1,4 +1,4 @@
-package com.abctreinamentos.servidorpublicobdwebrest.entity;
+package com.lar.aluno.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -6,16 +6,13 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="servidorpublico")
-public class ServidorPublico {
+public class Aluno {
 	
 	@Id
 	private Long matricula;
 	private String nome;
 	private String foto;
-	private String orgao;
 	private String vinculo;
-	private String cargo;
-	private String lotacao;
 	private String exercicio;
 	private String email;
 	private String telefone;
@@ -23,7 +20,7 @@ public class ServidorPublico {
 	private String cpf;
 	private String naturalidade;
 	
-	public ServidorPublico() {
+	public Aluno() {
 		super();
 	}
 	public Long getMatricula() {
@@ -44,29 +41,11 @@ public class ServidorPublico {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
-	public String getOrgao() {
-		return orgao;
-	}
-	public void setOrgao(String orgao) {
-		this.orgao = orgao;
-	}
 	public String getVinculo() {
 		return vinculo;
 	}
 	public void setVinculo(String vinculo) {
 		this.vinculo = vinculo;
-	}
-	public String getCargo() {
-		return cargo;
-	}
-	public void setCargo(String cargo) {
-		this.cargo = cargo;
-	}
-	public String getLotacao() {
-		return lotacao;
-	}
-	public void setLotacao(String lotacao) {
-		this.lotacao = lotacao;
 	}
 	public String getExercicio() {
 		return exercicio;

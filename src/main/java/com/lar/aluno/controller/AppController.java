@@ -1,4 +1,4 @@
-package com.abctreinamentos.servidorpublicobdwebrest.controller;
+package com.lar.aluno.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,23 +17,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.abctreinamentos.servidorpublicobdwebrest.api.CursoAPIRest;
-import com.abctreinamentos.servidorpublicobdwebrest.api.ServidorPublicoAPIRest;
-import com.abctreinamentos.servidorpublicobdwebrest.entity.Curso;
-import com.abctreinamentos.servidorpublicobdwebrest.entity.ServidorPublico;
-import com.abctreinamentos.servidorpublicobdwebrest.service.CursoService;
-import com.abctreinamentos.servidorpublicobdwebrest.service.ServidorPublicoService;
+import com.lar.aluno.entity.Curso;
+import com.lar.aluno.entity.Aluno;
+import com.lar.aluno.service.CursoService;
+import com.lar.aluno.service.AlunoService;
+import com.lar.curso.api.CursoAPIRest;
+import com.lar.curso.api.AlunoAPIRest;
 
 @RestController
-public class AppController implements ServidorPublicoAPIRest, CursoAPIRest{
+public class AppController implements AlunoAPIRest, CursoAPIRest{
 	
-	private ServidorPublicoService servidorService;
+	private AlunoService alunoService;
 	private CursoService cursoService;
 	
 	@Autowired
-	public void setServidorPublicoService(ServidorPublicoService servidorService)
+	public void setServidorPublicoService(AlunoService alunoService)
 	{
-		this.servidorService = servidorService;
+		this.alunoService = alunoService;
 	}
 	
 	@Autowired
@@ -42,65 +42,65 @@ public class AppController implements ServidorPublicoAPIRest, CursoAPIRest{
 		this.cursoService = cursoService;
 	}
 
-	/*********** API SERVIDORPUBLICO *************/
-	@GetMapping("/listarServidores")
-	public ResponseEntity<List<ServidorPublico>> listarServidores() {
-		List<ServidorPublico> servidorespublicos = servidorService.listAll();
-		return new ResponseEntity<List<ServidorPublico>>(servidorespublicos,HttpStatus.OK);
+	/*********** API ALUNO *************/
+	@GetMapping("/listarAlunos")
+	public ResponseEntity<List<Aluno>> listarAlunos() {
+		List<Aluno> alunos = alunoService.listAll();
+		return new ResponseEntity<List<Aluno>>(alunos,HttpStatus.OK);
 	}
 
-	@GetMapping("/listarServidor/{matricula}")
-	public ResponseEntity<ServidorPublico> listarServidor(long matricula) {
+	@GetMapping("/listaraluno/{matricula}")
+	public ResponseEntity<Aluno> listarAluno(long matricula) {
 		
-		Optional<ServidorPublico> servidorEncontrado = servidorService.listByMatricula(matricula);
+		Optional<Aluno> alunoEncontrado = alunoService.listByMatricula(matricula);
 		
-		if (servidorEncontrado.isPresent())
-			return new ResponseEntity<ServidorPublico>(servidorEncontrado.get(),HttpStatus.OK);
+		if (alunoEncontrado.isPresent())
+			return new ResponseEntity<Aluno>(alunoEncontrado.get(),HttpStatus.OK);
 		else
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Servidor Público Não Encontrado");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Aluno Não Encontrado");
 	}
 
-	@DeleteMapping("/excluirServidor/{matricula}")
-	public void excluirServidor(long matricula) {
+	@DeleteMapping("/excluirAluno/{matricula}")
+	public void excluirAluno(long matricula) {
 		
-		Optional<ServidorPublico> servidorEncontrado = servidorService.listByMatricula(matricula);
+		Optional<Aluno> alunoEncontrado = alunoService.listByMatricula(matricula);
 		
-		if (servidorEncontrado.isPresent())
+		if (alunoEncontrado.isPresent())
 		{
-			servidorService.delete(matricula);
-			throw new ResponseStatusException(HttpStatus.OK,"Servidor Público Excluído");
+			alunoService.delete(matricula);
+			throw new ResponseStatusException(HttpStatus.OK,"Aluno Excluído");
 		}
 		else
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Servidor Público Não Encontrado");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Aluno Não Encontrado");
 	}
 
-	@PutMapping("/editarServidor/{matricula}")
-	public String editarServidor(long matricula, @RequestBody ServidorPublico servidorAlterado) {
+	@PutMapping("/editarAluno/{matricula}")
+	public String editarServidor(long matricula, @RequestBody Aluno alunoAlterado) {
 		
-		Optional<ServidorPublico> servidorEncontrado = servidorService.listByMatricula(matricula);
+		Optional<Aluno> alunoEncontrado = alunoService.listByMatricula(matricula);
 		
-		if (servidorEncontrado.isPresent())
+		if (alunoEncontrado.isPresent())
 		{
-			servidorService.update(servidorAlterado);
-			throw new ResponseStatusException(HttpStatus.OK,"Servidor Público Alterado");
+			alunoService.update(alunoAlterado);
+			throw new ResponseStatusException(HttpStatus.OK,"Aluno Alterado");
 		}
 		else
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Servidor Público Não Encontrado");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Aluno não Encontrado");
 
 	}
 
-	@PostMapping("/cadastrarServidor")
-	public String cadastrarServidor(@RequestBody ServidorPublico novoservidor) {
+	@PostMapping("/cadastraraluno")
+	public String cadastrarAluno(@RequestBody Aluno novoaluno) {
 		
-		Optional<ServidorPublico> servidorEncontrado = servidorService.listByMatricula(novoservidor.getMatricula());
+		Optional<Aluno> alunoEncontrado = alunoService.listByMatricula(novoaluno.getMatricula());
 		
-		if (!servidorEncontrado.isPresent())
+		if (!alunoEncontrado.isPresent())
 		{
-			servidorService.save(novoservidor);
-			throw new ResponseStatusException(HttpStatus.OK,"Servidor Público Cadastrado");
+			alunoService.save(novoaluno);
+			throw new ResponseStatusException(HttpStatus.OK,"Aluno Cadastrado");
 		}
 		else
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Servidor Público Já Existente");	
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Aluno Já Existente");	
 	}
 	
 	/*********** API CURSO *************/
@@ -164,5 +164,35 @@ public class AppController implements ServidorPublicoAPIRest, CursoAPIRest{
 		body.put("message", ex.getReason());
 		body.put("status", ex.getStatusCode());
 		return new ResponseEntity<>(body, ex.getStatusCode());
+	}
+
+	@Override
+	public ResponseEntity<List<Aluno>> listarAlunos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<Aluno> listarAluno(long matricula) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void excluirServidor(long matricula) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String cadastrarAluno(Aluno novoaluno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String editarAluno(long matricula, Aluno aluno) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

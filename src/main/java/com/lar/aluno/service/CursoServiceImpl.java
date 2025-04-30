@@ -1,4 +1,4 @@
-package com.abctreinamentos.servidorpublicobdwebrest.service;
+package com.lar.aluno.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,39 +7,39 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.abctreinamentos.servidorpublicobdwebrest.entity.ServidorPublico;
-import com.abctreinamentos.servidorpublicobdwebrest.repository.ServidorPublicoRepository;
+import com.lar.aluno.entity.Aluno;
+import com.lar.aluno.repository.AlunoRepository;
 
 
 @Service
-public class ServidorPublicoServiceImpl implements ServidorPublicoService {
+public class CursoServiceImpl implements AlunoService {
 
 	@Autowired
-	private ServidorPublicoRepository servidorRepository;
+	private AlunoRepository servidorRepository;
 	
 	@Override
-	public List<ServidorPublico> listAll() 
+	public List<Aluno> listAll() 
 	{
-		List<ServidorPublico> servidorespublicos = new ArrayList<>();
+		List<Aluno> servidorespublicos = new ArrayList<>();
 		servidorRepository.findAll().forEach(servidorespublicos::add);
 		return servidorespublicos;	
 	}
 
 	@Override
-	public Optional<ServidorPublico> listByMatricula(long matricula) 
+	public Optional<Aluno> listByMatricula(long matricula) 
 	{
 		return servidorRepository.findById(matricula);		
 	}
 
 	@Override
-	public void save(ServidorPublico servidor) {
+	public void save(Aluno servidor) {
 		servidorRepository.save(servidor);
 	}
 
 	@Override
-	public void update(ServidorPublico servidor) {
+	public void update(Aluno servidor) {
 		
-		Optional<ServidorPublico> servidorEncontrado = 
+		Optional<Aluno> servidorEncontrado = 
 				servidorRepository.findById(servidor.getMatricula());	
 		
 		servidorEncontrado.ifPresent(
@@ -51,7 +51,7 @@ public class ServidorPublicoServiceImpl implements ServidorPublicoService {
 
 	@Override
 	public void delete(long matricula) {
-		Optional<ServidorPublico> servidorEncontrado = 
+		Optional<Aluno> servidorEncontrado = 
 				servidorRepository.findById(matricula);	
 		
 		servidorEncontrado.ifPresent(

@@ -1,4 +1,4 @@
-package com.abctreinamentos.servidorpublicobdwebrest.service;
+package com.lar.aluno.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,11 +7,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.abctreinamentos.servidorpublicobdwebrest.entity.Curso;
-import com.abctreinamentos.servidorpublicobdwebrest.repository.CursoRepository;
+import com.lar.aluno.entity.Curso;
+import com.lar.aluno.repository.CursoRepository;
 
 @Service
-public class CursoServiceImpl implements CursoService {
+public class AlunoServiceImpl implements CursoService {
 
 	@Autowired
 	private CursoRepository cursoRepository;

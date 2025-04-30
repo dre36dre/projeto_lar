@@ -1,9 +1,9 @@
-package com.abctreinamentos.servidorpublicobdwebrest.service;
+package com.lar.aluno.service;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.abctreinamentos.servidorpublicobdwebrest.entity.Curso;
+import com.lar.aluno.entity.Curso;
 
 public interface CursoService {
 	

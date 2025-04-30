@@ -1,13 +1,13 @@
-package com.abctreinamentos.servidorpublicobdwebrest;
+package com.lar.aluno;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ServidorpublicobdwebRestApiApplication {
-
+public class AlunoApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(ServidorpublicobdwebRestApiApplication.class, args);
+		SpringApplication.run(AlunoApplication.class, args);
+
 	}
 
 }

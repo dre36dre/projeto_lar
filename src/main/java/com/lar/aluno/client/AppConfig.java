@@ -1,4 +1,4 @@
-package com.abctreinamentos.servidorpublicobdwebrest.client;
+package com.lar.aluno.client;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

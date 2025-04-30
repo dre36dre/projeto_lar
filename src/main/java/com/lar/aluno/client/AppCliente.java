@@ -1,4 +1,4 @@
-package com.abctreinamentos.servidorpublicobdwebrest.client;
+package com.lar.aluno.client;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
+
+import com.lar.aluno.entity.Curso;
+import com.lar.aluno.entity.Aluno;
+
 import org.springframework.core.ParameterizedTypeReference;
-
-
-import com.abctreinamentos.servidorpublicobdwebrest.entity.ServidorPublico;
-import com.abctreinamentos.servidorpublicobdwebrest.entity.Curso;
 
 @Controller
 public class AppCliente {
@@ -29,73 +29,75 @@ public class AppCliente {
 	@Autowired
 	private RestTemplate restTemplate;
 	
-	/*********** API SERVIDORPUBLICO *************/
-	@GetMapping("/listagemServidores")
-	public String listarServidores(Model model) {
+	/*********** API ALUNO *************/
+	@GetMapping("/listagemAlunos")
+	public String listarAlunos(Model model) {
 		
-		String url = "http://localhost:8080/listarServidores"; 
+		String url = "http://localhost:8080/listarAlunos"; 
 		
-	    ResponseEntity<List<ServidorPublico>> response = restTemplate.exchange(
+	    ResponseEntity<List<Aluno>> response = restTemplate.exchange(
 	        url,
 	        HttpMethod.GET,
 	        null,
-	        new ParameterizedTypeReference<List<ServidorPublico>>() {}
+	        new ParameterizedTypeReference<List<Aluno>>() {}
 	    );
 		
-		List<ServidorPublico> servidorespublicos = response.getBody();
+		List<Aluno> alunos = response.getBody();
 		
-		model.addAttribute("servidorespublicos",servidorespublicos);
+		model.addAttribute("listarAlunos",alunos);
 		
-		return "/servidorpublico/servidorespublicos";	
+		return "/aluno/alunos";	
 	}
 
-	@GetMapping("/listaServidor/{matricula}")
-	public String listarServidor(@PathVariable long matricula, Model model) {
+	@GetMapping("/listarAluno/{matricula}")
+	public String listarAluno(@PathVariable long matricula, Model model) {
 		
-		String url = "http://localhost:8080/listarServidor/{matricula}"; 
+		String url = "http://localhost:8080/listarAluno/{matricula}"; 
 		
-	    ResponseEntity<ServidorPublico> response = restTemplate.exchange(
+	    ResponseEntity<Aluno> response = restTemplate.exchange(
 	        url,
 	        HttpMethod.GET,
 	        null,
-	        new ParameterizedTypeReference<ServidorPublico>() {},matricula
+	        new ParameterizedTypeReference<Aluno>() {},matricula
 	    );
 		
-		ServidorPublico servidorpublico = response.getBody();
+		Aluno aluno = response.getBody();
 		
-		model.addAttribute("servidorpublico",servidorpublico);
+		model.addAttribute("servidorpublico",aluno);
 		
-		return "/servidorpublico/servidorpublico";
+		return "/aluno/aluno";
 	
 	}
 
-	@GetMapping("/exclusaoServidor/{matricula}")
-	public String excluirServidor(@PathVariable long matricula) {
+	@GetMapping("/exclusaoAluno/{matricula}")
+	public String excluirAluno(@PathVariable long matricula) {
 		
-		return "redirect:/listagemServidores";
+	//	String url = "http://localhost:8080/excluirAluno/{matricula}"; 
+		
+		return "redirect:/listagemAlunos";
 	}
 	
-	@GetMapping("/formNovoServidor")
-	public String formNovoServidor(Model model)
+	@GetMapping("/formNovoAluno")
+	public String formNovoAluno(Model model)
 	{
-		model.addAttribute("servidorPublico",new ServidorPublico());
-		return "servidorpublico/novoservidorpublico";
+		model.addAttribute("aluno",new Aluno());
+		return "aluno/novoaluno";
 	}
 	
-	@PostMapping("/cadastroServidor")
-	public String cadastrarServidor(ServidorPublico novoservidor, Model model) {
+	@PostMapping("/cadastroAluno")
+	public String cadastrarAluno(Aluno novoAluno, Model model) {
 	   
-		String url = "http://localhost:8080/cadastrarServidor"; 
+		String url = "http://localhost:8080/cadastrarAluno"; 
 		
-		ResponseEntity<ServidorPublico> response = restTemplate.exchange(
+		ResponseEntity<Aluno> response = restTemplate.exchange(
 	        url,
 	        HttpMethod.POST,
-	        new HttpEntity<>(novoservidor),
-	        ServidorPublico.class
+	        new HttpEntity<>(novoAluno),
+	        Aluno.class
 	    );
 
 	    if (response.getStatusCode() == HttpStatus.OK)
-	    	return "redirect:/listagemServidores";
+	    	return "redirect:/listagemAlunos";
 	    else
 	    {
 	    	model.addAttribute("mensagem",response.getStatusCode());
@@ -103,27 +105,27 @@ public class AppCliente {
 	    }
 	}
 
-	@GetMapping("/formEditarServidor/{matricula}")
-	public String formEditarServidor(@PathVariable long matricula, Model model)
+	@GetMapping("/formEditarAluno/{matricula}")
+	public String formEditarAluno(@PathVariable long matricula, Model model)
 	{
-		String url = "http://localhost:8080/listarServidor/{matricula}"; 
+		String url = "http://localhost:8080/listarAluno/{matricula}"; 
 		
-	    ResponseEntity<ServidorPublico> response = restTemplate.exchange(
+	    ResponseEntity<Aluno> response = restTemplate.exchange(
 	        url,
 	        HttpMethod.GET,
 	        null,
-	        new ParameterizedTypeReference<ServidorPublico>() {},matricula
+	        new ParameterizedTypeReference<Aluno>() {},matricula
 	    );
 		
-		ServidorPublico servidorpublico = response.getBody();
+		Aluno aluno = response.getBody();
 		
-		model.addAttribute("servidorpublico",servidorpublico);
+		model.addAttribute("aluno",aluno);
 		
-		return "/servidorpublico/editarservidorpublico";
+		return "/aluno/editaraluno";
 	}
 	
-	@PostMapping("/edicaoServidor/{matricula}")
-	public String editarServidor(@PathVariable long matricula, ServidorPublico servidor)
+	@PostMapping("/edicaoaluno/{matricula}")
+	public String editarAluno(@PathVariable long matricula, Aluno aluno)
 	{
 		return "redirect:/listagemServidores";
 	}
