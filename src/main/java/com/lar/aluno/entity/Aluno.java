@@ -12,8 +12,6 @@ public class Aluno {
 	private Long matricula;
 	private String nome;
 	private String foto;
-	private String vinculo;
-	private String exercicio;
 	private String email;
 	private String telefone;
 	private String celular; 
@@ -41,18 +39,7 @@ public class Aluno {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
-	public String getVinculo() {
-		return vinculo;
-	}
-	public void setVinculo(String vinculo) {
-		this.vinculo = vinculo;
-	}
-	public String getExercicio() {
-		return exercicio;
-	}
-	public void setExercicio(String exercicio) {
-		this.exercicio = exercicio;
-	}
+	
 	public String getEmail() {
 		return email;
 	}
