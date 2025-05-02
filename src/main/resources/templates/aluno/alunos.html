@@ -13,38 +13,35 @@
     <div th:insert="fragments/navbar.html"> </div>
 
     <div class="jumbotron">
-        <h3>Listagem dos Servidores Públicos</h3>
+        <h3>Listagem dos Alunos</h3>
         <!-- Verifica se a lista está vazia -->
 		<th:block th:if="${#lists.isEmpty(servidorespublicos)}">
-   			<p>Não há servidores públicos cadastrados</p>
+   			<p>Não há alunos cadastrados</p>
 		</th:block>
 
-		<!-- Caso a lista não esteja vazia, mostra os servidores -->
-		<th:block th:if="${not #lists.isEmpty(servidorespublicos)}">
+		<!-- Caso a lista não esteja vazia, mostra os alunos -->
+		<th:block th:if="${not #lists.isEmpty(alunos)}">
    		<table class="table table-striped">      
 		    <thead class="thead-dark">
 		    <tr>
 		        <th scope="col">Foto</th>
 		        <th scope="col">Nome</th>
-				<th scope="col">Cargo</th>
-		        <th scope="col">Órgão</th>
-		        <th scope="col">Lotação</th>
 				<th scope="col">Email</th>
 		        <th scope="col">Ações</th>
 		    </tr>
 		    </thead>
 		    <tbody>
-		    <tr th:each="servidor : ${servidorespublicos}">
-		        <td><img th:src="${servidor.foto}" width="75px" height="75px" /></td>
-		        <td th:text="${servidor.nome}"></td>
-		        <td th:text="${servidor.cargo}"></td>
-		        <td th:text="${servidor.orgao}"></td>
-		        <td th:text="${servidor.lotacao}"></td>
-		        <td th:text="${servidor.email}"></td>
+		    <tr th:each="aluno : ${alunos}">
+		        <td><img th:src="${aluno.foto}" width="75px" height="75px" /></td>
+		        <td th:text="${aluno.nome}"></td>
+		        <td th:text="${aluno.cargo}"></td>
+		        <td th:text="${aluno.orgao}"></td>
+		        <td th:text="${aluno.lotacao}"></td>
+		        <td th:text="${aluno.email}"></td>
 		        <td>
 		          <div class="btn-group" role="group" aria-label="Ações">
-		        	<a th:href="@{'/listaServidor/' + ${servidor.matricula}}" class="btn btn-primary">Detalhar</a>
-		        	<a th:href="@{'/formEditarServidor/' + ${servidor.matricula}}" class="btn btn-secondary">Alterar</a>
+		        	<a th:href="@{'/listaaluno/' + ${aluno.matricula}}" class="btn btn-primary">Detalhar</a>
+		        	<a th:href="@{'/formEditarAluno/' + ${servidor.matricula}}" class="btn btn-secondary">Alterar</a>
 		        	<a th:href="@{'/exclusaoServidor/' + ${servidor.matricula}}" class="btn btn-danger">Excluir</a>
 		          </div> 
 		        </td>
