@@ -7,56 +7,54 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lar.aluno.entity.Aluno;
-import com.lar.aluno.repository.AlunoRepository;
 
 
 @Service
-public class CursoServiceImpl implements AlunoService {
+public class CursoServiceImpl implements CursoService {
 
 	@Autowired
-	private AlunoRepository servidorRepository;
+	private CursoRepository cursoRepository;
 	
 	@Override
-	public List<Aluno> listAll() 
+	public List<Curso> listAll() 
 	{
-		List<Aluno> servidorespublicos = new ArrayList<>();
-		servidorRepository.findAll().forEach(servidorespublicos::add);
-		return servidorespublicos;	
+		List<Curso> cursos = new ArrayList<>();
+		cursoRepository.findAll().forEach(curso::add);
+		return cursos;	
 	}
 
 	@Override
-	public Optional<Aluno> listByMatricula(long matricula) 
+	public Optional<Curso> listByMatricula(long matricula) 
 	{
-		return servidorRepository.findById(matricula);		
+		return cursoRepository.findById(matricula);		
 	}
 
 	@Override
-	public void save(Aluno servidor) {
-		servidorRepository.save(servidor);
+	public void save(Curso curso) {
+		cursoRepository.save(curso);
 	}
 
 	@Override
-	public void update(Aluno servidor) {
+	public void update(Curso curso) {
 		
-		Optional<Aluno> servidorEncontrado = 
-				servidorRepository.findById(servidor.getMatricula());	
+		Optional<Curso> cursoEncontrado = 
+				cursoRepository.findById(curso.getMatricula());	
 		
-		servidorEncontrado.ifPresent(
+		cursoEncontrado.ifPresent(
 			p -> {
-				servidorRepository.save(servidor);
+				cursoRepository.save(curso);
 			}
 		);		
 	}
 
 	@Override
 	public void delete(long matricula) {
-		Optional<Aluno> servidorEncontrado = 
-				servidorRepository.findById(matricula);	
+		Optional<Aluno> cursoEncontrado = 
+				cursoRepository.findById(matricula);	
 		
-		servidorEncontrado.ifPresent(
+		cursoEncontrado.ifPresent(
 			p -> {
-				servidorRepository.delete(servidorEncontrado.get());
+				cursoRepository.delete(cursoEncontrado.get());
 			}
 		);	
 		
