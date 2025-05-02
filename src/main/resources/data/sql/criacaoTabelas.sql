@@ -1,4 +1,4 @@
-CREATE TABLE ServidorPublico (
+CREATE TABLE Aluno (
   `matricula` int NOT NULL,
   `nome` varchar(45) NOT NULL,
   `foto` varchar(60) NOT NULL,
@@ -25,11 +25,11 @@ CREATE TABLE Curso (
 	UNIQUE KEY `idCurso_UNIQUE` (`idCurso`)
 );
 
-CREATE TABLE ServidorPublicoCurso (
-    servidor_id INT,
+CREATE TABLE AlunoCurso (
+    aluno_id INT,
     curso_id INT,
-    PRIMARY KEY (servidor_id, curso_id),
-    FOREIGN KEY (servidor_id) REFERENCES ServidorPublico(matricula)
+    PRIMARY KEY (aluno_id, curso_id),
+    FOREIGN KEY (aluno_id) REFERENCES Aluno(matricula)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
     FOREIGN KEY (curso_id) REFERENCES Curso(idCurso)
